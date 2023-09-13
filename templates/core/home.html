@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %} <!-- Agrega esta línea para cargar las etiquetas de archivos estáticos -->
+
+{% block content %}
+<style>
+    /* Estilos específicos para tu página sin afectar Bootstrap */
+    h1 {
+        font-size: 36px;
+        text-align: center;
+        color: #333; /* Cambia el color de texto según tus preferencias */
+        margin-top: 20px;
+    }
+
+    .presentacion {
+        background-color: #fff;
+        padding: 30px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 18px;
+        color: #444; /* Cambia el color de texto según tus preferencias */
+    }
+
+    .btn-acceso {
+        background-color: #007bff;
+        color: #fff;
+        font-size: 24px;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    .btn-acceso:hover {
+        background-color: #0056b3;
+    }
+
+    /* Estilos para la imagen */
+    .icon-img {
+        display: block;
+        margin: 0 auto; /* Centro horizontalmente */
+        max-width: 100%; /* Tamaño máximo del contenedor */
+        height: 250px; /* Altura automática para mantener la proporción */
+        margin-top: 20px; /* Espacio superior */
+    }
+</style>
+
+<!-- Contenido de tu página -->
+<h1 class="mint">Biblioteca Institucional</h1>
+
+<!-- Imagen -->
+<img src="{% static 'icon.png' %}" alt="Icono de biblioteca" class="icon-img">
+
+<!-- Sección de Presentación -->
+<section class="presentacion">
+    <h2>Bienvenidos a nuestra biblioteca</h2>
+    <p>Descubre una amplia colección de libros en nuestra biblioteca institucional. Tenemos libros de todos los géneros para satisfacer tus necesidades de lectura.</p>
+    <a href="{% url 'catalogo' %}" class="btn-acceso">Explora el Catálogo</a>
+</section>
+{% endblock %}
+

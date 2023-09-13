@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-4 mx-auto">
+    {% for libro in libros %}
+    <form method="post" action="{% url 'reserva_libro_funcionalidad' titulo=libro.titulo %}">
+    {% endfor %}
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="selectCampo">Libro seleccionado</label>
+            <select class="form-control" id="selectCampo" disabled>
+                {% for libro in libros %}
+                <option value="{{ libro.titulo }} {{ libro.isbn }}" selected> Título: {{ libro.titulo }} Autor: {{libro.autor}} ({{ libro.isbn }})</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" id="titulo" name="titulo" value="{{ libros.0.titulo }}">
+        </div>
+        <div class="form-group">
+            <label for="fechaInicio">Fecha de inicio de reserva</label>
+            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+        </div>
+        <div class="form-group">
+            <label for="fechaFin">Fecha de fin de reserva</label>
+            <input type="date" class="form-control" id="fechaFin" name="fechaFin">
+        </div>
+        <button type="submit" class="btn btn-primary">Reserva tu libro</button>
+    </form>
+</div>
+{% endblock %}
+

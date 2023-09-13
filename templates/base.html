@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    {% block meta %}
+      <meta name="theme-color" content="#333333">
+      <meta name="msapplication-TileColor" content="#2b5797">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <meta name="apple-mobile-web-app-title" content="{{ site.name }}">
+      <meta property="og:type" content="website">
+      {% endblock meta %}
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% block header %}{% endblock header %}
+    <header class="p-1 mb-1 border-bottom" style="border-bottom: solid 3px #eee;">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{% url 'home' %}" class="nav-link px-2" style="color: var(--midBlue);">Principal</a></li>
+            <li><a href="{% url 'catalogo' %}" class="nav-link px-2" style="color: var(--midBlue);">Catálogo</a></li>
+            {% if user.is_superuser %}
+            <li><a href="/admin" class="nav-link px-2" style="color: var(--midBlue);">Panel admin</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'perfil_usuario' %}" class="nav-link px-2" style="color: var(--midBlue);">Perfil</a></li>
+            <li><a href="{% url 'account_logout' %}" class="nav-link px-2" style="color: var(--midBlue);">Cerrar sesión</a></li>
+              {% else %}
+              <li><a href="{% url 'account_login' %}" class="nav-link px-2" style="color: var(--midBlue);">Iniciar sesión</a></li>
+            <li><a href="{% url 'account_signup' %}" class="nav-link px-2" style="color: var(--midBlue);">Registrarse</a></li>
+              {% endif %}   
+            <li><a href="#" class="nav-link px-2" style="color: var(--midBlue);"></a></li>
+            <li><a href="#" class="nav-link px-2" style="color: var(--midBlue);"></a></li>
+          </ul>
+    
+        </div>
+      </div>
+    </header>
+    
+    
+    
+    {% block content %}{% endblock content %}
+    {% block footer %}{% endblock footer %}
+
+</body>
+</html>

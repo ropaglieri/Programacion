@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-8 mx-auto">
+    <h2>Perfil de usuario</h2>
+    <hr>
+    <h3>Nombre de usuario: {{ usuario.username }}</h3>
+    <h3>Correo electrónico: {{ usuario.email }}</h3>
+    
+    <h3>Reservas:</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Inicio de solicitud</th>
+                <th>Fin de solicitud</th>
+                <th>Estado de solicitud</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas_usuario %}
+            <tr>
+                <td>{{ reserva.titulo }}</td>
+                <td>{{ reserva.tiempo_inicio_reserva }}</td>
+                <td>{{ reserva.tiempo_fin_reserva }}</td>
+                <td>
+                    {% if not reserva.en_espera_de_retirarse and not reserva.ya_retirado %}
+                        <span class="badge bg-warning text-dark">Aún no se ha aprobado la solicitud</span>
+                    {% elif reserva.en_espera_de_retirarse %}
+                        <span class="badge bg-success">¡Su solicitud ha sido aprobada! Puede acercarse a la biblioteca a retirarlo</span>
+                    {% elif reserva.ya_retirado %}
+                        <span class="badge bg-info text-dark">El libro ya ha sido retirado de la biblioteca</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No tienes reservas realizadas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

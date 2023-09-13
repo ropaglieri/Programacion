@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-4 mx-auto">
+    <h2>Perfil de usuario</h2>
+    <hr>
+    <h3>Nombre de usuario: {{ user.username }}</h3>
+    <h3>Correo electrónico: {{ user.email }}</h3>
+    
+    <!-- Botón para cambiar la contraseña -->
+    <a href="{% url 'password_change' %}" class="btn btn-primary">Cambiar Contraseña</a>
+    
+    <!-- Botón para revisar reservas -->
+    <a href="{% url 'revisar_reservas' %}" class="btn btn-success">Revisar Reservas</a>
+</div>
+{% endblock %}
